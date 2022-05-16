@@ -4,7 +4,7 @@
 #include <set>
 using namespace std;
 
-const int R = 3;
+const int R = 4;
 const int C = 4;
 
 
@@ -80,7 +80,7 @@ int col[] = { 0, -1, 0, 1 };
 bool isSafe(int x, int y) {return x >= 0 && x < R && y >= 0 && y < C; }
 
 
-
+/*
 int Cost(int initial[R][C], int final[R][C]) {
 	int count = 0;
 
@@ -91,6 +91,32 @@ int Cost(int initial[R][C], int final[R][C]) {
 
 	return count;
 }
+*/
+
+typedef pair<int,int> co;
+co findCo(int val, int arr[R][C]) {
+    for (int i = 0; i < R; i++) {
+        for (int j = 0; j < C; j++) {
+            if (arr[i][j] == val) {
+                return {i,j};
+            }
+        }
+    }
+}
+
+int Cost(int initial[R][C], int final[R][C]) {
+    int count = 0;
+
+    for (int i = 0; i < R*C; i++ ) {
+        co st = findCo(i, initial);
+        co ed = findCo(i, final);
+        int point = abs(st.first - ed.first) + abs(st.second - ed.second);
+        count += point;
+    }
+    return count;
+}
+
+
 
 
 
@@ -126,8 +152,8 @@ void solve(int initial[R][C], int x, int y,	int final[R][C]) {
 							min->level + 1, min);
 				child->cost = Cost(child->mat, final);
 
-                if (vst.find(getHash(child->mat)) != vst.end())
-                    continue;
+                //if (vst.find(getHash(child->mat)) != vst.end())
+                //    continue;
 
                 if (max_lv < child->level) {
                     max_lv = child->level;
@@ -147,13 +173,15 @@ int main() {
     std::chrono::milliseconds millisecond;
 
 
-/*
-	int initial[R][C] = {
-        {1, 10, 15, 4},
-        {13, 6, 3, 8},
-        {2, 9, 12, 7},
-        {14, 5, 0, 11}
-	};
+
+	int initial[R][C] = {};
+    for (int i = 0; i < R; i++) {
+        for (int j = 0; j < C; j++) {
+            cin >> initial[i][j];
+        }
+    }
+    int x,y;
+    cin >> x >> y;
 
 	int final[R][C] = {
         {1, 2, 3, 4},
@@ -162,7 +190,19 @@ int main() {
         {13, 14, 15, 0}
 	};
 
+/*
+             0 15  8  3     6  5  9 13    11  5  9 13     0 15  8 13     0 15  8 13     0 11  9 13
+            12 11  7  4     2  1 10 14     2  6 10 14    12 11  3  7    12 11  9 10    12 15 10 14
+            14 10  6  5     3  7  0 15     3  7  0 15    14  9  6  2    14  3  6  2     3  7  6  2
+             9 13  2  1     4  8 12 11     4  8 12  1 	  4 10  5  1     4  7  5  1     4  8  5  1
+Estimate:            48             58             58             58             62             66
+Moves:               70             72             74             76             78             80
+Time:            111.4s          56.6s          13.7s           5.8s           5.7s           3.5s
+Nodes:        492357819      231367077       46383751       20187376       18363209       12715201
+*/
 
+
+/*
 	int initial[R][C] = {
 		{7, 2, 3},
 		{5, 1, 4},
@@ -175,7 +215,7 @@ int main() {
         {7, 8, 0}
 	};
 */
-
+/*
     int initial[R][C] = {
         {4, 2, 3, 1},
         {9, 5, 11, 8},
@@ -187,8 +227,7 @@ int main() {
         {5,6,7,8},
         {9,10,11,0}
     };
-
-	int x = 2, y = 2;
+*/
 
     startTime = std::chrono::system_clock::now();
     	solve(initial, x, y, final);

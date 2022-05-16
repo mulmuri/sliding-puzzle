@@ -54,13 +54,6 @@ public:
 };
 
 
-class IDAstar : private PuzzleSolver {
-public:
-    void solve();
-
-};
-
-
 class Constructive_DnC : private PuzzleSolver {
 public:
     void solve();
@@ -71,6 +64,13 @@ class Astar_DnC : private PuzzleSolver {
 public:
     void solve();
 };
+
+
+class Astar_MeetInTheMiddle : private PuzzleSolver {
+public:
+    void solve();
+};
+
 
 
 
