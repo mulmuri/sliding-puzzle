@@ -2,3 +2,12 @@
 
 solution/**
 !solution/*.cpp
+
+Astar-solution/**
+!Astar-solution/*.cpp
+!Astar-solution/*.hpp
+
+mulmuri-solution/**
+!mulmuri-solution/*.cpp
+
+test.cpp
