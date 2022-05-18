@@ -1,11 +1,11 @@
+// modified from https://github.com/siddg97/Npuzzle
+
 #include <iostream>
 #include <ctime>
 #include <queue>
 #include <vector>
 #include <random>
 #include <chrono>
-
-#define int int
 
 using namespace std;
 
