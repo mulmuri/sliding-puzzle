@@ -1,6 +1,6 @@
 # sliding-puzzle
 
-Fastest Sliding Puzzle Solution Ever!
+**Fastest Sliding Puzzle Solution Ever!**
 
 It is known that the IDA* algorithm generally outperforms A* in terms of speed. This solution employs IDA* to great effect.
 
